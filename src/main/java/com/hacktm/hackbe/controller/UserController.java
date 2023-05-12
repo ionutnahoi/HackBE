@@ -38,14 +38,9 @@ public class UserController {
         return userService.findById(aLong);
     }
 
-    @DeleteMapping("{/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteById(Long id) {
         userService.deleteById(id);
-    }
-
-    @GetMapping("getAll")
-    public List<User> findAll(Sort sort) {
-        return userService.findAll(sort);
     }
 
     public boolean existsById(Long aLong) {

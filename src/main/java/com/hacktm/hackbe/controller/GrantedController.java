@@ -31,7 +31,7 @@ public class GrantedController {
         return grantedService.findById(id);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteById(Long id) {
         grantedService.deleteById(id);
     }

@@ -33,6 +33,6 @@ public class RoleService {
     }
 
     public boolean existByName(String name) {
-        return roleRepo.existByName(name);
+        return roleRepo.existsByName(name);
     }
 }

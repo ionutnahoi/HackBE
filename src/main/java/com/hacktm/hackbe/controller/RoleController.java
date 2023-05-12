@@ -34,7 +34,7 @@ public class RoleController {
         return roleService.findById(id);
     }
 
-    @DeleteMapping("{/delete/id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteById(Long id) {
         roleService.deleteById(id);
     }

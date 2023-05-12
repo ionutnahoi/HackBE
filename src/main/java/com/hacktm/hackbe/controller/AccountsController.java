@@ -32,7 +32,7 @@ public class AccountsController {
         return accountsService.findById(id);
     }
 
-    @DeleteMapping("{/delete/id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteById(Long id) {
         accountsService.deleteById(id);
     }
