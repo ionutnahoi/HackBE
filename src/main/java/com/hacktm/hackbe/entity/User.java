@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.lang.NonNull;
 
 @Entity
 @Table
@@ -16,7 +17,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
-    private String mail, password;
+    @NonNull
+    private String mail;
+    @NonNull
+    private String password;
     @OneToOne
     private Role role;
 }

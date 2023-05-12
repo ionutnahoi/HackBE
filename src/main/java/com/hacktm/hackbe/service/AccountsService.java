@@ -2,6 +2,7 @@ package com.hacktm.hackbe.service;
 
 import com.hacktm.hackbe.entity.Accounts;
 import com.hacktm.hackbe.repo.AccountsRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,6 +10,8 @@ import java.util.Optional;
 
 @Service
 public class AccountsService {
+
+    @Autowired
     private AccountsRepo accountsRepo;
 
     public List<Accounts> findAll() {

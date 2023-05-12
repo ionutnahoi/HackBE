@@ -1,5 +1,6 @@
 package com.hacktm.hackbe.controller;
 
+import com.hacktm.hackbe.entity.Role;
 import com.hacktm.hackbe.entity.User;
 import com.hacktm.hackbe.service.RoleService;
 import com.hacktm.hackbe.service.UserService;
@@ -23,7 +24,7 @@ public class UserController {
 
     @PostMapping("{nume_rol}")
     public <S extends User> S save(@PathVariable String nume_rol, @RequestBody S entity) throws Exception {
-        return userService.save(entity);
+       return userService.save(entity, nume_rol);
     }
 
     @GetMapping("getAll")

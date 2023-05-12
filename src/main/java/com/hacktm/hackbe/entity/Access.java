@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.lang.NonNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table
@@ -13,15 +15,18 @@ import org.springframework.lang.NonNull;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Role {
-    @Id
+public class Access {
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     private Long id;
 
-    @NonNull
-    private String name;
+    @OneToOne
+    private Accounts account;
 
-    @JoinColumn(name = "rl_acc_fk")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Accounts accounts_who_can_accept;
+    @OneToOne
+    private Role role_who_can_access;
+
+    @OneToMany(mappedBy = "accounts_who_can_accept", cascade = CascadeType.ALL)
+    private List<Role> roles_who_can_accept = new ArrayList<>();
 }

@@ -40,4 +40,8 @@ public class RoleService {
     public boolean existByName(String name) {
         return roleRepo.existsByName(name);
     }
+
+    public Role findRoleByName(String nume_rol) {
+        return roleRepo.findByName(nume_rol);
+    }
 }

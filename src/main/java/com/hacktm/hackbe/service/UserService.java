@@ -1,7 +1,10 @@
 package com.hacktm.hackbe.service;
 
+import com.hacktm.hackbe.entity.Role;
 import com.hacktm.hackbe.entity.User;
+import com.hacktm.hackbe.repo.RoleRepo;
 import com.hacktm.hackbe.repo.UserRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -10,20 +13,16 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-
+    @Autowired
     private UserRepo userRepo;
+    @Autowired
+    private RoleRepo roleRepo;
 
-    public <S extends User> S save(S entity) throws Exception {
-        boolean existsEmailOrUsername = userRepo.existsByMail(entity.getMail());
-        if (existsEmailOrUsername) {
-            throw new Exception("Email " + entity.getMail() + " or username " + " are invalid! ");
-        }
-//        boolean emailValid = EmailValidator.getInstance().isValid(entity.getMail());
-        if (entity.getMail().isEmpty()) {
-            return userRepo.save(entity);
-        } else {
-            throw new Exception("Email " + entity.getMail() + " is not valid");
-        }
+    public <S extends User> S save(S entity, String role) throws Exception {
+        Role roleToSet = roleRepo.findByName(role);
+        entity.setRole(roleToSet);
+
+        return userRepo.save(entity);
     }
 
     public List<User> findAll() {
