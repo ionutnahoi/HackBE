@@ -23,17 +23,17 @@ public class AccountsController {
     }
 
     @PostMapping
-    public void save(Accounts entity) {
+    public void save(@RequestBody Accounts entity) {
         accountsService.save(entity);
     }
 
     @GetMapping("{id}")
-    public Optional<Accounts> findById(Long id) {
+    public Optional<Accounts> findById(@PathVariable Long id) {
         return accountsService.findById(id);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteById(Long id) {
+    public void deleteById(@PathVariable Long id) {
         accountsService.deleteById(id);
     }
 

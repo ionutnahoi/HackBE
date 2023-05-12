@@ -25,21 +25,21 @@ public class RoleController {
     }
 
     @PostMapping
-    public void save(Role entity) {
-        roleService.save(entity);
+    public <S extends Role> S save(@RequestBody S entity) {
+        return roleService.save(entity);
     }
 
     @GetMapping("{id}")
-    public Optional<Role> findById(Long id) {
+    public Optional<Role> findById(@PathVariable Long id) {
         return roleService.findById(id);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteById(Long id) {
+    public void deleteById(@PathVariable Long id) {
         roleService.deleteById(id);
     }
 
-    public boolean existsById(Long id) {
+    public boolean existsById(@PathVariable Long id) {
         return roleService.existsById(id);
     }
 }

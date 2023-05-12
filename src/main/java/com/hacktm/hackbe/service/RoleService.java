@@ -2,22 +2,27 @@ package com.hacktm.hackbe.service;
 
 import com.hacktm.hackbe.entity.Role;
 import com.hacktm.hackbe.repo.RoleRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.print.attribute.standard.MediaSize;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class RoleService {
-    private RoleRepo roleRepo;
+    @Autowired
+    private final RoleRepo roleRepo;
+
+    public RoleService(RoleRepo roleRepo) {
+        this.roleRepo = roleRepo;
+    }
 
     public List<Role> findAll() {
         return roleRepo.findAll();
     }
 
-    public void save(Role entity) {
-        roleRepo.save(entity);
+    public <S extends Role> S save(S entity) {
+        return roleRepo.save(entity);
     }
 
     public Optional<Role> findById(Long aLong) {

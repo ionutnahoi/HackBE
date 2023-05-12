@@ -4,10 +4,7 @@ import com.hacktm.hackbe.entity.User;
 import com.hacktm.hackbe.service.RoleService;
 import com.hacktm.hackbe.service.UserService;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,7 +21,8 @@ public class UserController {
         this.roleService = roleService;
     }
 
-    public <S extends User> S save(S entity) throws Exception {
+    @PostMapping("{nume_rol}")
+    public <S extends User> S save(@PathVariable String nume_rol, @RequestBody S entity) throws Exception {
         return userService.save(entity);
     }
 
@@ -34,12 +32,12 @@ public class UserController {
     }
 
     @GetMapping("{id}")
-    public Optional<User> findById(Long aLong) {
+    public Optional<User> findById(@PathVariable Long aLong) {
         return userService.findById(aLong);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteById(Long id) {
+    public void deleteById(@PathVariable Long id) {
         userService.deleteById(id);
     }
 

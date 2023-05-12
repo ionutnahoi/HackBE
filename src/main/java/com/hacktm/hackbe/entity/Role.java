@@ -16,10 +16,15 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    String name;
+
+
+    private String name;
+
+
     @JoinColumn(name = "rl_fk")
     @ManyToOne(fetch = FetchType.LAZY)
     private Accounts account_who_wants_to_access;
+
     @JoinColumn(name = "rl_acc_fk")
     @ManyToOne(fetch = FetchType.LAZY)
     private Accounts accounts_who_can_accept;

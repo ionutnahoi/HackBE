@@ -27,16 +27,16 @@ public class GrantedController {
     }
 
     @GetMapping("{id}")
-    public Optional<Granted> findById(Long id) {
+    public Optional<Granted> findById(@PathVariable Long id) {
         return grantedService.findById(id);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteById(Long id) {
+    public void deleteById(@PathVariable Long id) {
         grantedService.deleteById(id);
     }
 
-    public boolean existsById(Long aLong) {
+    public boolean existsById(@PathVariable Long aLong) {
         return grantedService.existsById(aLong);
     }
 }
