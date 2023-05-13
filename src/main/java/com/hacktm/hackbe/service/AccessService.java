@@ -27,7 +27,7 @@ public class AccessService {
         Accounts accountToFind = accountsRepo.findById(account).orElseThrow();
         Role findRole = roleRepo.findByName(role);
         Optional<Role> whoAccepts = roleRepo.findById(role_who_accepts_id);
-        if(whoAccepts.isPresent()) {
+        if (whoAccepts.isPresent()) {
             Long id = whoAccepts.get().getId();
             Access access = new Access();
             access.setAccount(accountToFind);
@@ -41,5 +41,10 @@ public class AccessService {
 
     public List<Access> getAll() {
         return accessRepo.findAll();
+    }
+
+    public List<Access> getAccessByRole(String name) {
+        return accessRepo.findByRole_who_can_access(name);
+
     }
 }

@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("Role")
+@CrossOrigin
 public class RoleController {
 
     private final RoleService roleService;

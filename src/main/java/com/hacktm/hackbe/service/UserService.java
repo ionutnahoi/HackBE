@@ -41,12 +41,16 @@ public class UserService {
         userRepo.deleteById(aLong);
     }
 
+    public User getUserByMail(String mail){
+        return userRepo.findByMail(mail);
+    }
+
     public List<User> findAll(Sort sort) {
         return userRepo.findAll(sort);
     }
 
     public boolean validation(String email, String password) {
-        User user = userRepo.findByEmail(email);
+        User user = userRepo.findByMail(email);
         return user.getPassword().equals(password);
     }
 }

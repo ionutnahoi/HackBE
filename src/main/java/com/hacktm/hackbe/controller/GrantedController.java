@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("Granted")
+@CrossOrigin
 public class GrantedController {
     private final GrantedService grantedService;
 

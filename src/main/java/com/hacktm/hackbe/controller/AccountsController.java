@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("Accounts")
+@CrossOrigin
 public class AccountsController {
 
     private final AccountsService accountsService;

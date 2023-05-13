@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("User")
+@CrossOrigin
 public class UserController {
 
     private final UserService userService;
@@ -46,11 +47,12 @@ public class UserController {
         return userService.existsById(aLong);
     }
 
-    @GetMapping("/validation")
+    @GetMapping("/validation/{email}/{password}")
     public ResponseEntity<HttpStatus> checkIfEmailAndPasswordIsValid(@PathVariable String email, @PathVariable String password) {
         boolean validation = userService.validation(email, password);
+
         if(validation) {
-            return ResponseEntity.ok(HttpStatus.OK);
-        } else return ResponseEntity.ok(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
