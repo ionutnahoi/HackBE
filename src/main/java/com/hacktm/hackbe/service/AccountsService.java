@@ -33,4 +33,8 @@ public class AccountsService {
     public boolean existsById(Long aLong) {
         return accountsRepo.existsById(aLong);
     }
+
+    public Accounts findByName(String account_name) {
+    return accountsRepo.findByName(account_name);
+    }
 }

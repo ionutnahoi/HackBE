@@ -1,9 +1,14 @@
 package com.hacktm.hackbe.controller;
 
+import com.hacktm.hackbe.entity.Access;
 import com.hacktm.hackbe.entity.Granted;
+import com.hacktm.hackbe.entity.User;
+import com.hacktm.hackbe.service.AccessService;
 import com.hacktm.hackbe.service.GrantedService;
+import com.hacktm.hackbe.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,8 +18,14 @@ import java.util.Optional;
 public class GrantedController {
     private final GrantedService grantedService;
 
-    public GrantedController(GrantedService grantedService) {
+    private final UserService userService;
+
+    private final AccessService accessService;
+
+    public GrantedController(GrantedService grantedService, UserService userService, AccessService accessService) {
         this.grantedService = grantedService;
+        this.userService = userService;
+        this.accessService = accessService;
     }
 
     @GetMapping("getAll")
@@ -22,9 +33,9 @@ public class GrantedController {
         return grantedService.findAll();
     }
 
-    @PostMapping
-    public void save(Granted entity) {
-        grantedService.save(entity);
+    @PostMapping("{email}/{account_name}")
+    public void save(@PathVariable String email, @PathVariable String account_name) {
+        grantedService.save(email, account_name);
     }
 
     @GetMapping("{id}")
@@ -35,6 +46,25 @@ public class GrantedController {
     @DeleteMapping("/delete/{id}")
     public void deleteById(@PathVariable Long id) {
         grantedService.deleteById(id);
+    }
+
+    @GetMapping("toAccept/{mail}")
+    public List<Access> getWhatToAccept(@PathVariable String mail) {
+        User user = userService.getUserByMail(mail);
+        List<Granted> granteds = grantedService.findAll();
+        List<Access> accest_user_can_accept = new ArrayList<>();
+        accest_user_can_accept = accessService.getByRolesICanAccept(user.getRole().getName());
+        List<Access> new_List = new ArrayList<>();
+
+        for (Granted granted : granteds) {
+            for (Access access : accest_user_can_accept) {
+                if (access.getAccount().getId() == granted.getAccount().getId()) {
+                    new_List.add(access);
+                }
+            }
+        }
+        return new_List;
+
     }
 
     public boolean existsById(@PathVariable Long aLong) {

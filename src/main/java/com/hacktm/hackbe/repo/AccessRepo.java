@@ -11,4 +11,6 @@ import java.util.List;
 public interface AccessRepo extends JpaRepository<Access, Long> {
     @Query("select b from Access b where b.role_who_can_access.name=:role_name")
     List<Access> findByRole_who_can_access(String role_name);
+
+    List<Access> findByRoles_who_can_accept(String role_name);
 }

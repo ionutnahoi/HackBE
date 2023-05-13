@@ -47,4 +47,9 @@ public class AccessService {
         return accessRepo.findByRole_who_can_access(name);
 
     }
+
+    public List<Access> getByRolesICanAccept(String role_name) {
+
+        return accessRepo.findByRoles_who_can_accept(role_name);
+    }
 }
