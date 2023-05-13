@@ -27,6 +27,6 @@ public class Access {
     @OneToOne
     private Role role_who_can_access;
 
-    @OneToMany(mappedBy = "accounts_who_can_accept", cascade = CascadeType.ALL)
-    private List<Role> roles_who_can_accept = new ArrayList<>();
+//    @OneToMany(mappedBy = "accounts_who_can_accept", cascade = CascadeType.ALL)
+    private List<Long> roles_who_can_accept = new ArrayList<>();
 }

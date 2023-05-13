@@ -23,17 +23,20 @@ public class AccessService {
     @Autowired
     private RoleRepo roleRepo;
 
-    public void save(Long account, String role, String role_who_accepts) {
+    public void save(Long account, String role, Long role_who_accepts_id) {
         Accounts accountToFind = accountsRepo.findById(account).orElseThrow();
         Role findRole = roleRepo.findByName(role);
-        Role whoAccepts = roleRepo.findByName(role_who_accepts);
+        Optional<Role> whoAccepts = roleRepo.findById(role_who_accepts_id);
+        if(whoAccepts.isPresent()) {
+            Long id = whoAccepts.get().getId();
+            Access access = new Access();
+            access.setAccount(accountToFind);
+            access.setRole_who_can_access(findRole);
+            access.getRoles_who_can_accept().add(id);
+            accessRepo.save(access);
 
-        Access access = new Access();
-        access.setAccount(accountToFind);
-        access.setRole_who_can_access(findRole);
-        access.getRoles_who_can_accept().add(whoAccepts);
+        }
 
-        accessRepo.save(access);
     }
 
     public List<Access> getAll() {

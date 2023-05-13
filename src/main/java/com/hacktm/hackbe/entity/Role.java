@@ -21,7 +21,7 @@ public class Role {
     @NonNull
     private String name;
 
-    @JoinColumn(name = "rl_acc_fk")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Accounts accounts_who_can_accept;
+//    @JoinColumn(name = "rl_acc_fk")
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    private Accounts accounts_who_can_accept;
 }

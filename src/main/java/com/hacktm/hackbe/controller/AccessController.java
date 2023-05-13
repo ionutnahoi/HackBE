@@ -18,7 +18,7 @@ public class AccessController {
     }
 
     @PostMapping("/{account}/{role}/{role_who_accepts}")
-    public void save (@PathVariable Long account, @PathVariable String role, @PathVariable String role_who_accepts) {
+    public void save (@PathVariable Long account, @PathVariable String role, @PathVariable Long role_who_accepts) {
         accessService.save(account, role, role_who_accepts);
     }
 

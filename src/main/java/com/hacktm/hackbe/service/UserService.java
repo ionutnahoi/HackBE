@@ -44,4 +44,9 @@ public class UserService {
     public List<User> findAll(Sort sort) {
         return userRepo.findAll(sort);
     }
+
+    public boolean validation(String email, String password) {
+        User user = userRepo.findByEmail(email);
+        return user.getPassword().equals(password);
+    }
 }

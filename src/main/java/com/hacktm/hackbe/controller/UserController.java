@@ -1,10 +1,10 @@
 package com.hacktm.hackbe.controller;
 
-import com.hacktm.hackbe.entity.Role;
 import com.hacktm.hackbe.entity.User;
 import com.hacktm.hackbe.service.RoleService;
 import com.hacktm.hackbe.service.UserService;
-import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,5 +44,13 @@ public class UserController {
 
     public boolean existsById(Long aLong) {
         return userService.existsById(aLong);
+    }
+
+    @GetMapping("/validation")
+    public ResponseEntity<HttpStatus> checkIfEmailAndPasswordIsValid(@PathVariable String email, @PathVariable String password) {
+        boolean validation = userService.validation(email, password);
+        if(validation) {
+            return ResponseEntity.ok(HttpStatus.OK);
+        } else return ResponseEntity.ok(HttpStatus.NOT_FOUND);
     }
 }
