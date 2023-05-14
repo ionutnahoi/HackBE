@@ -48,8 +48,8 @@ public class AccessService {
 
     }
 
-    public List<Access> getByRolesICanAccept(Long role_name) {
+    public List<Access> getByRolesICanAccept(Long role_id) {
 
-        return accessRepo.findByRoles_who_can_accept(role_name);
+        return accessRepo.findByRoles_who_can_accept(role_id);
     }
 }

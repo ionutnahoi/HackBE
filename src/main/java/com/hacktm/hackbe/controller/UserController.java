@@ -1,5 +1,6 @@
 package com.hacktm.hackbe.controller;
 
+import com.hacktm.hackbe.entity.Role;
 import com.hacktm.hackbe.entity.User;
 import com.hacktm.hackbe.service.RoleService;
 import com.hacktm.hackbe.service.UserService;
@@ -25,7 +26,7 @@ public class UserController {
 
     @PostMapping("{nume_rol}")
     public <S extends User> S save(@PathVariable String nume_rol, @RequestBody S entity) throws Exception {
-       return userService.save(entity, nume_rol);
+        return userService.save(entity, nume_rol);
     }
 
     @GetMapping("getAll")
@@ -47,11 +48,16 @@ public class UserController {
         return userService.existsById(aLong);
     }
 
+    @GetMapping("email/{email}")
+    public Role getUserRoleByEmail(@PathVariable String email) {
+        return userService.getUserByMail(email).getRole();
+    }
+
     @GetMapping("/validation/{email}/{password}")
     public ResponseEntity<HttpStatus> checkIfEmailAndPasswordIsValid(@PathVariable String email, @PathVariable String password) {
         boolean validation = userService.validation(email, password);
 
-        if(validation) {
+        if (validation) {
             return new ResponseEntity<>(HttpStatus.OK);
         } else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }

@@ -50,17 +50,17 @@ public class GrantedController {
     }
 
     @GetMapping("toAccept/{mail}")
-    public List<Access> getWhatToAccept(@PathVariable String mail) {
+    public List<Granted> getWhatToAccept(@PathVariable String mail) {
         User user = userService.getUserByMail(mail);
         List<Granted> granteds = grantedService.findAll();
         List<Access> acces_user_can_accept = new ArrayList<>();
         acces_user_can_accept = accessService.getByRolesICanAccept(user.getRole().getId());
-        List<Access> new_List = new ArrayList<>();
+        List<Granted> new_List = new ArrayList<>();
 
         for (Granted granted : granteds) {
             for (Access access : acces_user_can_accept) {
                 if (Objects.equals(access.getAccount().getId(), granted.getAccount().getId())) {
-                    new_List.add(access);
+                    new_List.add(granted);
                 }
             }
         }
