@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -52,13 +53,13 @@ public class GrantedController {
     public List<Access> getWhatToAccept(@PathVariable String mail) {
         User user = userService.getUserByMail(mail);
         List<Granted> granteds = grantedService.findAll();
-        List<Access> accest_user_can_accept = new ArrayList<>();
-        accest_user_can_accept = accessService.getByRolesICanAccept(user.getRole().getName());
+        List<Access> acces_user_can_accept = new ArrayList<>();
+        acces_user_can_accept = accessService.getByRolesICanAccept(user.getRole().getId());
         List<Access> new_List = new ArrayList<>();
 
         for (Granted granted : granteds) {
-            for (Access access : accest_user_can_accept) {
-                if (access.getAccount().getId() == granted.getAccount().getId()) {
+            for (Access access : acces_user_can_accept) {
+                if (Objects.equals(access.getAccount().getId(), granted.getAccount().getId())) {
                     new_List.add(access);
                 }
             }

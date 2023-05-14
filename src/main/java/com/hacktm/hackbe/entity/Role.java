@@ -19,6 +19,7 @@ public class Role {
     private Long id;
 
     @NonNull
+    @Column(unique = true)
     private String name;
 
 //    @JoinColumn(name = "rl_acc_fk")

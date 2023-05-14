@@ -24,6 +24,7 @@ public class Accounts {
     @NonNull
     private String name;
     @NonNull
+    @Column(unique = true)
     private String email;
     @NonNull
     private String password;
